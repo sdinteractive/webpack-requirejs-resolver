@@ -1,0 +1,23 @@
+{
+  "name": "@sdinteractive/requirejs-resolver",
+  "version": "1.0.0",
+  "description": "webpack resolver to find requirejs modules via requirejs config.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sdinteractive/webpack-requirejs-resolver.git"
+  },
+  "keywords": [
+    "webpack",
+    "requirejs"
+  ],
+  "author": "Something Digital",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdinteractive/webpack-requirejs-resolver/issues"
+  },
+  "homepage": "https://github.com/sdinteractive/webpack-requirejs-resolver#readme"
+}
