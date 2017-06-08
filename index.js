@@ -4,6 +4,7 @@ const vm = require('vm');
 
 function RequireJsResolverPlugin(options) {
     this.configPath = options.configPath;
+    this.sandbox = options.sandbox || {};
 }
 
 RequireJsResolverPlugin.prototype.getConfig = function(fs) {
@@ -24,11 +25,11 @@ RequireJsResolverPlugin.prototype.getConfig = function(fs) {
             return this.configData;
         }
 
-        var sandbox = {
+        let sandbox = Object.assign({
             paths: {},
             require: function() {
             },
-        };
+        }, this.sandbox);
         sandbox.require.addPaths = function(paths) {
             for (var path in paths) {
                 sandbox.paths[path] = paths[path];
