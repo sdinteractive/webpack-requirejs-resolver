@@ -65,7 +65,9 @@ RequireJsResolverPlugin.prototype.apply = function(resolver) {
             } else {
                 callback();
             }
-        })
+        }, err => {
+            callback(err);
+        });
     });
 };
 
