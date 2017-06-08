@@ -25,6 +25,7 @@ RequireJsResolverPlugin.prototype.getConfig = function(fs) {
         }
 
         var sandbox = {
+            window: {location: {href: ''}},
             paths: {},
             require: function() {
             },
