@@ -55,12 +55,24 @@ RequireJsResolverPlugin.prototype.getConfig = function (fs) {
     });
 };
 
+function registerHook(object, oldName, newName, cb) {
+    if (object.hooks) {
+        object.hooks[newName].tapAsync('RequireJsResolverPlugin', cb);
+    } else {
+        object.plugin(oldName, cb);
+    }
+}
+
 RequireJsResolverPlugin.prototype.apply = function (resolver) {
-    resolver.plugin('module', (request, callback) => {
+    const target = resolver.ensureHook('resolve');
+    registerHook(resolver, 'module', 'module', (request, resolveContext, callback) => {
+        if (!callback) {
+            callback = resolveContext;
+        }
         this.getConfig(resolver.fileSystem).then(config => {
             if (config[request.request]) {
                 const nextRequest = Object.assign({}, request, { request: config[request.request] });
-                return resolver.doResolve('resolve', nextRequest, 'mapping via requirejs-config', callback);
+                return resolver.doResolve(target, nextRequest, 'mapping via requirejs-config', callback);
             } else {
                 callback();
             }
